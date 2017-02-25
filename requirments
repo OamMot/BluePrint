@@ -1,0 +1,10 @@
+flask
+flask_wtf
+requests
+bs4
+json
+re
+urllib
+urllib2
+BeautifulSoup
+pymysql
