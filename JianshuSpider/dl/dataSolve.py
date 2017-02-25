@@ -14,7 +14,6 @@ def insertDlSpiderData(data = []):
         mysql = 'insert into jianshu_topic_feed(user_id, topic_identify, title, summary, published_at, inserted_at) ' \
                                         'values(%s, %s, %s, %s, %s, %s)'
         arrInput = [1, i['topic_identify'], i['title'], i['summary'], i['published_at'], i['inserted_at']]
-        print mysql, arrInput
         insert(conn, mysql, arrInput)
     conn.close()
 
