@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from JianshuSpider.dl.dataSolve import *
+from JianshuSpider.dl.jianshu_topic_feed_data_solve import *
 
 def insertData(data = []):
-    insertDlSpiderData(data)
-    return 1
+    return insertDlSpiderData(data)
