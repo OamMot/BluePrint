@@ -1,18 +1,20 @@
 CREATE TABLE `spider_pool` (
   `pool_id` smallint(10) NOT NULL AUTO_INCREMENT,
   `spider_type` smallint(10) NOT NULL,
-  `user_id` smallint(10) NOT NULL,
+  `identify` char(100) NOT NULL,
   `published_at` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`pool_id`),
-  index `spider_pool_spider_type_index` (`spider_type`),
+  index `spider_pool_identify_index` (`identify`),
   index `spider_pool_pool_id_index` (`pool_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user` (
   `user_id` smallint(10) NOT NULL AUTO_INCREMENT,
-  `user_identify` varchar(100) NOT NULL,
+  `user_identify` varchar(100) DEFAULT NULL,
   `nickname` varchar(100) NOT NULL,
   `published_at` bigint(20) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `avatar` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   index `user_user_id_index` (`user_id`),
   index `user_user_identify_index` (`user_identify`)
