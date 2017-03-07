@@ -3,6 +3,7 @@ CREATE TABLE `spider_pool` (
   `spider_type` smallint(10) NOT NULL,
   `identify` char(100) NOT NULL,
   `published_at` bigint(20) DEFAULT NULL,
+  `follow_num` smallint(10) DEFAULT NULL,
   PRIMARY KEY (`pool_id`),
   index `spider_pool_identify_index` (`identify`),
   index `spider_pool_pool_id_index` (`pool_id`)
