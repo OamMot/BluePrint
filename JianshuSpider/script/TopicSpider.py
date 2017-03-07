@@ -125,16 +125,18 @@ def spider_remain(topic_identify = '', pool_id = 0):
 
 def main():
     # topic_identify = '20f7f4031550'
-    topic_identifys = []
-    for i in range(1, 1000000) :
-        topic_identifys = getSpiderPool(i, 100)
-        print topic_identifys
-        for ob_topic_identify in topic_identifys:
-            topic_identify = ob_topic_identify['identify']
-            pool_id = ob_topic_identify['pool_id']
-            spider_remain(topic_identify, pool_id)
-        if (len(topic_identifys) < 100):
-            break;
+    while (1) :
+        topic_identifys = []
+        for i in range(1, 1000000) :
+            topic_identifys = getSpiderPool(i, 100)
+            print topic_identifys
+            for ob_topic_identify in topic_identifys:
+                topic_identify = ob_topic_identify['identify']
+                pool_id = ob_topic_identify['pool_id']
+                spider_remain(topic_identify, pool_id)
+            if (len(topic_identifys) < 100):
+                break;
+
 
 if __name__ == "__main__":
     main()
