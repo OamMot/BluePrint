@@ -3,7 +3,9 @@ from urllib import urlencode
 import requests
 import time
 from bs4 import BeautifulSoup
+
 from JianshuSpider.service.insertSpiderData import *
+from JianshuSpider.service.getSpiderData import *
 
 def outAllData(allJianshuInfo):
     print '--------------------------------------------------------'
@@ -118,8 +120,15 @@ def spider_remain(topic_identify = ''):
     return 0
 
 def main():
-    topic_identify = '20f7f4031550'
-    spider_remain(topic_identify)
+    # topic_identify = '20f7f4031550'
+    topic_identifys = []
+    for i in range(1, 1000000) :
+        topic_identifys = getSpiderPool(i, 100)
+        print topic_identifys
+        # for topic_identify in topic_identifys:
+        #     spider_remain(topic_identify)
+        if (len(topic_identifys) < 100):
+            break;
 
 
 

@@ -19,10 +19,4 @@ def followJianshuTopic():
     type = int(request.args.get('type', 0))
     identify = str(request.args.get('identify', ''))
     followTopic(user_id, type, identify)
-
     return 'success'
-    #用户信息入库，记录他关注了哪个话题
-
-    #新的链接插入到库里
-
-    #
