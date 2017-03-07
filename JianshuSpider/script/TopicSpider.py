@@ -4,6 +4,9 @@ import requests
 import time
 from bs4 import BeautifulSoup
 
+import sys
+sys.path.append("../../../BluePrint/")
+
 from JianshuSpider.service.insertSpiderData import *
 from JianshuSpider.service.getSpiderData import *
 
@@ -18,7 +21,7 @@ def outAllData(allJianshuInfo):
     print '--------------------------------------------------------'
 
 
-def getAllInfoFromHtml(html) :
+def getAllInfoFromHtml(html = '', pool_id = 0) :
 
     soup = BeautifulSoup(html)
     data_score = soup.ul
@@ -58,7 +61,8 @@ def getAllInfoFromHtml(html) :
                                'inserted_at' : inserted_at,
                                'title' : title,
                                'topic_identify' : topic_identify,
-                               'summary' : summary
+                               'summary' : summary,
+                               'pool_id' : pool_id
                                })
     return allJianshuInfo
 
@@ -90,7 +94,7 @@ def spider_first(topic_identify = ''):
     # 1: 有重复
     # 0: 无重复
 
-def spider_remain(topic_identify = ''):
+def spider_remain(topic_identify = '', pool_id = 0):
     referer = 'http://www.jianshu.com/c/' + topic_identify
     header = {
         'Accept': 'text/html, */*; q=0.01',
@@ -109,11 +113,11 @@ def spider_remain(topic_identify = ''):
     }
 
     for i in range(1, 10):
-        time.sleep(10)
+        time.sleep(3)
         host = 'https://www.jianshu.com/c/' + topic_identify +'?order_by=added_at&page=' + str(i)
         req = requests.post(host, headers=header, data=post)
         json_str = req.text
-        allJianshuInfo = getAllInfoFromHtml(json_str)
+        allJianshuInfo = getAllInfoFromHtml(json_str, pool_id)
         haveRepeat = insertData(allJianshuInfo)
         if (haveRepeat == 1) :
             return 1;
@@ -125,12 +129,12 @@ def main():
     for i in range(1, 1000000) :
         topic_identifys = getSpiderPool(i, 100)
         print topic_identifys
-        # for topic_identify in topic_identifys:
-        #     spider_remain(topic_identify)
+        for ob_topic_identify in topic_identifys:
+            topic_identify = ob_topic_identify['identify']
+            pool_id = ob_topic_identify['pool_id']
+            spider_remain(topic_identify, pool_id)
         if (len(topic_identifys) < 100):
             break;
-
-
 
 if __name__ == "__main__":
     main()

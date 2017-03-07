@@ -14,9 +14,9 @@ def insertDlSpiderData(data = []):
         if len(selectInfo) > 0:
             boolRepeat = 1
             continue;
-        mysql = 'insert into jianshu_topic_feed(user_id, topic_identify, title, summary, published_at, inserted_at) ' \
-                                        'values(%s, %s, %s, %s, %s, %s)'
-        arrInput = [1, i['topic_identify'], i['title'], i['summary'], i['published_at'], i['inserted_at']]
+        mysql = 'insert into jianshu_topic_feed(user_id, topic_identify, title, summary, published_at, inserted_at, pool_id) ' \
+                                        'values(%s, %s, %s, %s, %s, %s, %s)'
+        arrInput = [1, i['topic_identify'], i['title'], i['summary'], i['published_at'], i['inserted_at'], i['pool_id']]
         insert(conn, mysql, arrInput)
 
     conn.close()
