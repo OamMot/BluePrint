@@ -115,7 +115,11 @@ def spider_remain(topic_identify = '', pool_id = 0):
     for i in range(1, 10):
         time.sleep(3)
         host = 'https://www.jianshu.com/c/' + topic_identify +'?order_by=added_at&page=' + str(i)
-        req = requests.post(host, headers=header, data=post, verify=False)
+        #verify=False 去掉会导致认证证书失败？
+        try:
+            req = requests.post(host, headers=header, data=post, verify=False, timeout=1)
+        except requests.exceptions.ConnectTimeout:
+            print 'connect timeout'
         json_str = req.text
         allJianshuInfo = getAllInfoFromHtml(json_str, pool_id)
         haveRepeat = insertData(allJianshuInfo)
@@ -128,7 +132,7 @@ def main():
     while (1) :
         topic_identifys = []
         for i in range(1, 1000000) :
-            topic_identifys = getSpiderPool(i, 100)
+            topic_identifys = getSpiderPool(i, 100) # 可优化
             print topic_identifys
             for ob_topic_identify in topic_identifys:
                 topic_identify = ob_topic_identify['identify']
