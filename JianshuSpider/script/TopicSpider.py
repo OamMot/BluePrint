@@ -120,6 +120,7 @@ def spider_remain(topic_identify = '', pool_id = 0):
             req = requests.post(host, headers=header, data=post, verify=False, timeout=1)
         except requests.exceptions.ConnectTimeout:
             print 'connect timeout'
+            return 0
         json_str = req.text
         allJianshuInfo = getAllInfoFromHtml(json_str, pool_id)
         haveRepeat = insertData(allJianshuInfo)
