@@ -3,15 +3,16 @@ import logging
 import time
 import os
 
-YMDH = time.strftime('%Y-%m-%d-%H',time.localtime(time.time()))
-dic = '../logs'
-if (os.path.exists(dic) == False):
-    os.makedirs(dic)
+def initLog():
+    YMDH = time.strftime('%Y-%m-%d-%H',time.localtime(time.time()))
+    dic = '../logs'
+    if (os.path.exists(dic) == False):
+        os.makedirs(dic)
 
-filename = '../logs/' + YMDH + '.log'
+    filename = '../logs/' + YMDH + '.log'
 
-logging.basicConfig(level=logging.DEBUG,
-                format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s %(funcName)s',
-                datefmt='%a, %d %b %Y %H:%M:%S',
-                filename=filename,
-                filemode='w')
+    logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s %(funcName)s',
+                    datefmt='%a, %d %b %Y %H:%M:%S',
+                    filename=filename,
+                    filemode='w')
