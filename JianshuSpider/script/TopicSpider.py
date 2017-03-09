@@ -118,7 +118,7 @@ def spider_remain(topic_identify = '', pool_id = 0):
         #verify=False 去掉会导致认证证书失败？
         try:
             req = requests.post(host, headers=header, data=post, verify=False, timeout=1)
-        except requests.exceptions.ConnectTimeout:
+        except requests.exceptions.RequestException:
             print 'connect timeout'
             return 0
         json_str = req.text

@@ -34,6 +34,7 @@ CREATE TABLE `user_spider_pool` (
 CREATE TABLE `jianshu_topic_feed` (
   `id` smallint(10) NOT NULL AUTO_INCREMENT,
   `user_id` smallint(10) NOT NULL,
+  `pool_id` smallint(10) NOT NULL,
   `topic_identify` varchar(100) NOT NULL,
   `title` varchar(500) DEFAULT NULL,
   `summary` varchar(500) DEFAULT NULL,
