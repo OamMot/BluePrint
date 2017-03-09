@@ -10,6 +10,7 @@ sys.path.append("../../../BluePrint/")
 
 from JianshuSpider.service.insertSpiderData import *
 from JianshuSpider.service.getSpiderData import *
+from flask import current_app
 
 def outAllData(allJianshuInfo):
     print '--------------------------------------------------------'
@@ -119,8 +120,8 @@ def spider_remain(topic_identify = '', pool_id = 0):
         #verify=False 去掉会导致认证证书失败？
         try:
             req = requests.post(host, headers=header, data=post, verify=False, timeout=1)
-        except requests.exceptions.RequestException:
-            logging.warning('connect timeout', host)
+        except requests.exceptions.RequestException, e:
+            current_app.logger.warning(e)
             return 0
         json_str = req.text
         allJianshuInfo = getAllInfoFromHtml(json_str, pool_id)
@@ -136,7 +137,7 @@ def main():
         for i in range(1, 1000000) :
             topic_identifys = getSpiderPool(i, 100) # 可优化
             print topic_identifys
-            logging.warning('topic_identifys', topic_identifys)
+            current_app.logger.warning(topic_identifys)
             for ob_topic_identify in topic_identifys:
                 topic_identify = ob_topic_identify['identify']
                 pool_id = ob_topic_identify['pool_id']
