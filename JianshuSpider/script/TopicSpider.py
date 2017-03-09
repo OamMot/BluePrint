@@ -121,13 +121,13 @@ def spider_remain(topic_identify = '', pool_id = 0):
         try:
             req = requests.post(host, headers=header, data=post, verify=False, timeout=1)
         except requests.exceptions.RequestException, e:
-            logging.warning(e)
+            current_app.logger.warning(e)
             return 0
         json_str = req.text
         allJianshuInfo = getAllInfoFromHtml(json_str, pool_id)
         haveRepeat = insertData(allJianshuInfo)
         if (haveRepeat == 1) :
-            return 1
+            return 1;
     return 0
 
 def main():
@@ -137,8 +137,8 @@ def main():
         topic_identifys = []
         for i in range(1, 1000000) :
             topic_identifys = getSpiderPool(i, 100) # 可优化
-            print topic_identifys
-            logging.warning(topic_identifys)
+            logging.info('---------')
+            # current_app.logger.warning('hahahahhaha')
             for ob_topic_identify in topic_identifys:
                 topic_identify = ob_topic_identify['identify']
                 pool_id = ob_topic_identify['pool_id']
