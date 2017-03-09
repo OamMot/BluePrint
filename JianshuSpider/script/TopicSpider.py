@@ -3,7 +3,6 @@ from urllib import urlencode
 import requests
 import time
 import logging
-from LogModule.logInit import *
 from bs4 import BeautifulSoup
 
 import sys
@@ -11,7 +10,7 @@ sys.path.append("../../../BluePrint/")
 
 from JianshuSpider.service.insertSpiderData import *
 from JianshuSpider.service.getSpiderData import *
-from flask import current_app
+from LogModule.logInit import *
 
 def outAllData(allJianshuInfo):
     print '--------------------------------------------------------'
