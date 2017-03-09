@@ -2,6 +2,7 @@
 from urllib import urlencode
 import requests
 import time
+import logging
 from bs4 import BeautifulSoup
 
 import sys
@@ -119,7 +120,7 @@ def spider_remain(topic_identify = '', pool_id = 0):
         try:
             req = requests.post(host, headers=header, data=post, verify=False, timeout=1)
         except requests.exceptions.RequestException:
-            print 'connect timeout'
+            logging.warning('connect timeout', host)
             return 0
         json_str = req.text
         allJianshuInfo = getAllInfoFromHtml(json_str, pool_id)
@@ -135,6 +136,7 @@ def main():
         for i in range(1, 1000000) :
             topic_identifys = getSpiderPool(i, 100) # 可优化
             print topic_identifys
+            logging.warning('topic_identifys', topic_identifys)
             for ob_topic_identify in topic_identifys:
                 topic_identify = ob_topic_identify['identify']
                 pool_id = ob_topic_identify['pool_id']

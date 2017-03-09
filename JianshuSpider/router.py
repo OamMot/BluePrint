@@ -13,6 +13,7 @@ def index():
     arrOutput['errno'] = 0
     arrOutput['errmsg'] = 'success'
     arrOutput['data'] = arrResponse
+
     return json.dumps(arrOutput, ensure_ascii=False)
 
 @jianshu.route('/followJianshuUser', methods=['GET'])  # 指定路由为/，因为run.py中指定了前缀，浏览器访问时，路径为http://IP/asset/
