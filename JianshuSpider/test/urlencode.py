@@ -1,5 +1,4 @@
 from urllib import urlencode
+import time
 
-a = '/aa/bbb'
-b = urlencode(a)
-print b
+print time.strftime('%Y-%m-%d-%H',time.localtime(time.time()))
