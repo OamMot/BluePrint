@@ -121,7 +121,7 @@ def spider_remain(topic_identify = '', pool_id = 0):
         try:
             req = requests.post(host, headers=header, data=post, verify=False, timeout=1)
         except requests.exceptions.RequestException, e:
-            current_app.logger.warning(e)
+            logging.warning(e)
             return 0
         json_str = req.text
         allJianshuInfo = getAllInfoFromHtml(json_str, pool_id)
