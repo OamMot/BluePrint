@@ -25,9 +25,13 @@ def outAllData(allJianshuInfo):
 
 def getAllInfoFromHtml(html = '', pool_id = 0) :
 
-    soup = BeautifulSoup(html)
-    data_score = soup.ul
-    li = data_score.findAll('li')
+    try :
+        soup = BeautifulSoup(html)
+        data_score = soup.ul
+        li = data_score.findAll('li')
+    except Exception, e:
+        print Exception, ":", e
+        return 0
 
     sum = 0
     allJianshuInfo = []
